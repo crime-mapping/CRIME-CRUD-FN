@@ -4,7 +4,7 @@ import axios from 'axios';
 interface AuthContextProps {
   isAuthenticated: boolean;
   user: any;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<{ success: boolean; message?: string }>;
   logout: () => void;
 }
 
@@ -24,11 +24,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const response = await axios.post(`${process.env.BACKEND_URl}`+'/api/auth/login', { email, password });
       setUser(response.data.user);
       setIsAuthenticated(true);
+      return { success: true };
     } catch (error) {
       console.error('Login error:', error);
+      return { success: false, message: 'Invalid credentials' };
     }
   };
 

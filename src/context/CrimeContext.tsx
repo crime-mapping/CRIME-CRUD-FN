@@ -3,9 +3,13 @@ import axios from 'axios';
 
 interface Crime {
   id: number;
-  title: string;
-  description: string;
-  date: string;
+  crimeName:string,
+  crimeType: string,
+  emergencyLevel:string,
+  suspectDescription:string,
+  caseStatus:string,
+  crimeLocation:string,
+  timeOfOccurence:string
 }
 
 interface CrimeContextProps {
@@ -29,7 +33,7 @@ export const CrimeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
   const fetchCrimes = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/crimes');
+      const response = await axios.get(`${process.env.BACKEND_URl}/api/crimes`);
       setCrimes(response.data);
     } catch (error) {
       console.error('Fetch crimes error:', error);

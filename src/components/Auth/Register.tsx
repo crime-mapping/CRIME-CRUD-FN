@@ -18,8 +18,8 @@ const Register: React.FC = () => {
     setError(null);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
-        fullName,
+      const response = await axios.post(`${import.meta.env.BACKEND_URl}`+'/api/auth/register', {
+        names:fullName,
         email,
         password,
       });

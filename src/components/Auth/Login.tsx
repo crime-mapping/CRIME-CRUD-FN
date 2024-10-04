@@ -9,12 +9,18 @@ const Login: React.FC = () => {
   const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    setErrorMessage(null);
     try {
-      await login(email, password);
-      navigate('/dashboard');
+      const result = await login(email, password);
+      if (result.success) {
+      navigate('/dashboard'); 
+    } else {
+      setErrorMessage(result.message ?? 'Something went wrong. Please try again.');
+    }
     } catch (error) {
       console.error('Login failed:', error);
     }
@@ -45,7 +51,8 @@ const Login: React.FC = () => {
           value={password} 
           onChange={(e) => setPassword(e.target.value)} 
           required 
-        />
+          />
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button type="button" className="auth-button" onClick={handleLogin}>Login</button>
       </form>
       <p className="login-redirect">
