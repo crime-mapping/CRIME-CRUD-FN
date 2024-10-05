@@ -1,15 +1,191 @@
-table {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 20px;
+  background-color:#fff;
+  color: #e0e0e0;
   width: 100%;
+}
+h3{
+  color: black;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #04a775;
+  margin-bottom: 20px;
+}
+
+.container table {
+  width: 98%;
   border-collapse: collapse;
 }
+
+table, th, td {
+  border: 1px solid black;
+  color: black;
+}
+
+table input{
+  border: none;
+  padding: 0;
+}
+
+.row-actions{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: auto;
+  gap: 5px;
+  border: none;
+}
+.row-actions button{
+  width: 100px;
+  padding: 5px;
+}
+
 th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  padding: 5px 15px;
+  width: 150px;
+  text-align: left;
 }
+
 th {
-  background-color: #f2f2f2;
+  background-color: #fff;
+  color: #04a775;
 }
-a {
-  color: #4caf50;
-  text-decoration: none;
+
+tr:nth-child(even) {
+  background-color: #d5f5eb;
 }
+
+.actions {
+  display: flex;
+  justify-content:flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100vw;
+}
+
+.edit-btn, .delete-btn{
+  border: 1px solid black;
+}
+
+.delete-btn{
+  color: red;
+}
+.delete-btn:hover{
+  border-color: red;
+}
+
+.add-crime-btn, .submit-btn {
+  padding: 10px 20px;
+  background-color: #04a775;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-crime-btn:hover, .submit-btn:hover {
+  background-color: #039b68;
+}
+
+.add-crime-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.modal-content input, .modal-content select {
+  width: 100%;
+  margin: 0 5px 10px 0;
+}
+
+.actions input, .actions select {
+  width: 200px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin: 0 5px 10px 0;
+}
+.actions button{
+  width: 150px;
+  height: 40px;
+  padding: 0px 10px;
+  border-color: #04a775;
+}
+
+input, select{
+    height: 40px;
+    padding: 5px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: medium;
+}
+
+input:focus, select:focus {
+ border-color: #04a775;
+  outline: none;
+}
+
+.filter-input {
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px solid ;
+  outline: none;
+  background-color: #ffff;
+  color: black;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-overlay .close-btn{
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  padding: 3px 20px 3px 20px;
+  font-weight: bolder;
+  border: 1px solid #04a775;
+}
+.modal-overlay .close-btn:hover{
+  border-color: red;
+}
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 35%;
+  max-width: 600px;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+} 

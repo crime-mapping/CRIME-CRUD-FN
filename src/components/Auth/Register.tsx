@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import '../../styles/auth.css';
 import logo from '../../assets/logo.png'
 
+const BACKEND_URl = 'http://localhost:8080/api';
+
 const Register: React.FC = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -18,10 +20,11 @@ const Register: React.FC = () => {
     setError(null);
 
     try {
-      const response = await axios.post(`${import.meta.env.BACKEND_URl}`+'/api/auth/register', {
+      const response = await axios.post(`${BACKEND_URl}`+'/auth/register', {
         names:fullName,
         email,
         password,
+        confirmPass:confirmPassword
       });
 
       if (response.status === 201) {
