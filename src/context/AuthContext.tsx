@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import axios from 'axios';
 
+const BACKEND_URl = 'http://localhost:8080/api';
+
 interface AuthContextProps {
   isAuthenticated: boolean;
   user: any;
@@ -24,7 +26,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post(`${process.env.BACKEND_URl}`+'/api/auth/login', { email, password });
+      const response = await axios.post(`${BACKEND_URl}`+'/auth/login', { email, password });
       setUser(response.data.user);
       setIsAuthenticated(true);
       return { success: true };
