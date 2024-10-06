@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header button{
+  border: 1px solid #04a775;
+}
+
 .container {
   padding: 20px;
   background-color:#fff;
@@ -13,6 +23,16 @@
 h3{
   color: black;
   margin-bottom: 10px;
+}
+
+.error-message {
+  color: red;
+  margin: 10px 0;
+}
+
+.success-message {
+  color: green;
+  margin: 10px 0;
 }
 
 h2 {

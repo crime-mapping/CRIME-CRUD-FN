@@ -147,3 +147,18 @@ input:focus {
         transform: translate(0, 0) scale(1);
     }
 }
+
+.auth-container .error-message {
+  color: red;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.error-input {
+  border: 1px solid red;
+}
+
+.auth-container .auth-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

@@ -3,8 +3,11 @@ import { useCrimes } from '../../context/CrimeContext';
 import axios from 'axios';
 import '../../styles/crime.css';
 import ConfirmationModal from '../ConfirmationModel';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const CrimeList: React.FC = () => {
+
   const { crimes, fetchCrimes, addCrime, editCrime, deleteCrime } = useCrimes();
   const [showAddForm, setShowAddForm] = useState(false);
   const [newCrime, setNewCrime] = useState({
@@ -26,6 +29,13 @@ const CrimeList: React.FC = () => {
   const [filteredCrimes, setFilteredCrimes] = useState(crimes);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [crimeToDelete, setCrimeToDelete] = useState<number | null>(null);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const loggedInUser = sessionStorage.getItem('loggedInUser');
+  if (!loggedInUser) {
+    navigate('/login');
+  }
 
   useEffect(() => {
     fetchCrimes();
@@ -55,6 +65,12 @@ const CrimeList: React.FC = () => {
       console.error('Error fetching filtered crimes:', error);
     }
   };
+
+
+  const handleLogout=() => {
+    logout();
+    navigate('/login');
+  }
 
   const handleAddCrime = (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,7 +116,10 @@ const CrimeList: React.FC = () => {
 
   return (
     <div className="container">
-      <h2>Crime List</h2>
+      <div className='header'>
+        <h2>All Crimes List</h2>
+        <button className='logout-btn' onClick={handleLogout}>Logout</button>
+      </div>
 
       <div className="actions">
         <button className="add-crime-btn" onClick={() => setShowAddForm(true)}>
@@ -187,6 +206,7 @@ const CrimeList: React.FC = () => {
                 onChange={(e) => setNewCrime({ ...newCrime, caseStatus: e.target.value })}
                 required
               >
+                <option value="">Select Case Status</option>
                 <option value="OPEN">Open</option>
                 <option value="CLOSED">Closed</option>
                 <option value="UNDER_INVESTIGATION">Under Investigation</option>

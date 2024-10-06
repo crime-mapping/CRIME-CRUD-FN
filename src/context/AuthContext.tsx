@@ -12,6 +12,7 @@ interface AuthContextProps {
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
+
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -28,7 +29,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     try {
       const response = await axios.post(`${BACKEND_URl}`+'/auth/login', { email, password });
       setUser(response.data.user);
+      sessionStorage.setItem('loggedInUser', JSON.stringify(response.data.user));
       setIsAuthenticated(true);
+
       return { success: true };
     } catch (error) {
       console.error('Login error:', error);
@@ -39,6 +42,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const logout = () => {
     setUser(null);
     setIsAuthenticated(false);
+    sessionStorage.removeItem('loggedInUser')
+    
   };
 
   return (
